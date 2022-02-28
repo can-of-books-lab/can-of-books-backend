@@ -1,5 +1,8 @@
 # Can-Of-Books-Backend
 
+**Author**: Andres Mills Gallego and Tanner Percival
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+
 ## Logistical
 
 - What hours will you be available to communicate?
@@ -33,10 +36,6 @@
 - How will you approach each other and the challenge of building an application knowing that it is impossible for two people to be at the exact same place in understanding and skill level?
   - Lean into the team embracing the fact that this is a team effort, and a team project where both people are valued and will contribute.
 
-# Project Name
-
-**Author**: Team Member Names Goes Here
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
@@ -57,3 +56,11 @@
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+## Lab 11
+
+Name of Feature:  Set Up Repos
+Estimated Time to Complete:  
+Start time:  2:30
+Finish time: 
+Actual time to complete: 
