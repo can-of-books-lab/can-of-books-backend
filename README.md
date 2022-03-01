@@ -64,3 +64,11 @@ Estimated Time to Complete: Honestly have no idea
 Start time:  2:30
 Finish time: 7:30p
 Actual time to complete:  Approx.  5hours 
+
+## Lab 12
+
+Name of Feature:  Post
+Estimated Time to Complete: Honestly have no idea 
+Start time:  3:20
+Finish time: 7:30p
+Actual time to complete:  Approx.  5hours 

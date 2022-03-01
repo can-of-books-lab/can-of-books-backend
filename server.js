@@ -21,11 +21,13 @@ db.once('open', function () {
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 3002;
 
 
 app.get('/books', getBooks);
+app.post('/books', postBooks);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello from our server');
@@ -41,7 +43,19 @@ async function getBooks(req, res, next) {
   }
 }
 
-
+async function postBooks (req, res, next) {
+  try {
+    let createdBook = await Book.create({
+      title: req.query.title,
+      description: req.query.description,
+      status: req.query.status,
+      email: req.query.email
+    });
+    res.status(200).send(createdBook);
+  } catch (error) {
+    next(error);
+  }
+}
 
 app.get('*', (req, res) => {
   res.status(404).send('Object Not Found');
