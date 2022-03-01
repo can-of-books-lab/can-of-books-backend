@@ -60,7 +60,7 @@
 ## Lab 11
 
 Name of Feature:  Set Up Repos
-Estimated Time to Complete:  
+Estimated Time to Complete: Honestly have no idea 
 Start time:  2:30
-Finish time: 
-Actual time to complete: 
+Finish time: 7:30p
+Actual time to complete:  Approx.  5hours 
