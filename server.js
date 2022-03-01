@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 async function getBooks(req, res, next) {
   try {
     let bookResults = await Book.find({email: req.query.email});
+    console.log(bookResults);
     res.status(200).send(bookResults);
   } catch (error) {
     next(error);
