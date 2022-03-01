@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 
 const db = mongoose.connection;
 
+const Book = require('./Models/Book');
+
 mongoose.connect(process.env.DB_URL);
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -25,7 +27,16 @@ app.get('/', (req, res) => {
   res.status(200).send('Hello from our server');
 });
 
+app.get('/books', getBooks);
 
+async function getBooks(req, res, next) {
+  try {
+    let bookResults = await Book.find({email: req.query.email});
+    res.status(200).send(bookResults);
+  } catch (error) {
+    next(error);
+  }
+}
 
 
 
