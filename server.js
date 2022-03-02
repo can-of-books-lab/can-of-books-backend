@@ -46,10 +46,10 @@ async function getBooks(req, res, next) {
 async function postBooks (req, res, next) {
   try {
     let createdBook = await Book.create({
-      title: req.query.title,
-      description: req.query.description,
-      status: req.query.status,
-      email: req.query.email
+      title: req.body.title,
+      description: req.body.description,
+      status: req.body.status,
+      email: req.body.email
     });
     res.status(200).send(createdBook);
   } catch (error) {
