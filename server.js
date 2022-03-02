@@ -28,6 +28,7 @@ const PORT = process.env.PORT || 3002;
 
 app.get('/books', getBooks);
 app.post('/books', postBooks);
+app.put('/books/:id', putBook);
 //add delete
 app.delete('/books/:id', deleteBook);
 
@@ -37,7 +38,7 @@ app.get('/', (req, res) => {
 
 async function getBooks(req, res, next) {
   try {
-    let bookResults = await Book.find({email: req.query.email});
+    let bookResults = await Book.find({ email: req.query.email });
     // console.log(bookResults);
     res.status(200).send(bookResults);
   } catch (error) {
@@ -45,7 +46,7 @@ async function getBooks(req, res, next) {
   }
 }
 
-async function postBooks (req, res, next) {
+async function postBooks(req, res, next) {
   try {
     let createdBook = await Book.create({
       title: req.body.title,
@@ -58,24 +59,34 @@ async function postBooks (req, res, next) {
     next(error);
   }
 }
+
+async function putBook(req, res, next) {
+  try {
+    let bookId = req.params.id;
+    let updatedBook = await Book.findByIdAndUpdate(bookId, req.body, {new: true, overwrite: true});
+    res.status(200).send(updatedBook);
+  } catch (error) {
+    next(error);
+  }
+}
 //add delete
-async function deleteBook(req, res, next){
-  let bookId = req.params.id
+async function deleteBook(req, res, next) {
+  let bookId = req.params.id;
   let userEmail = req.query.email;
   console.log(bookId);
-  try{
+  try {
 
     let obj = await Book.find({
       _id: bookId,
       email: userEmail
-      })
-      if(userEmail === obj.email){
+    });
+    if (userEmail === obj.email) {
 
-        await Book.findByIdAndDelete(bookId);
-        res.status(200).send("Book was succsfiully deleted");
-      }
-    res.status(500).send("Book not deleted: Book does not exist in the database OR you do not have permission to delete this book.");
-  }catch(error){
+      await Book.findByIdAndDelete(bookId);
+      res.status(200).send('sBook was succsfiully deleted');
+    }
+    res.status(500).send('Book not deleted: Book does not exist in the database OR you do not have permission to delete this book.');
+  } catch (error) {
     next(error);
   }
 }
@@ -84,7 +95,7 @@ app.get('*', (req, res) => {
   res.status(404).send('Object Not Found');
 });
 
-app.use((error, req, res, next) => {
+app.use((error, req, res) => {
   res.status(500).send(error.message);
 });
 
