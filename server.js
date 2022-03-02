@@ -28,6 +28,8 @@ const PORT = process.env.PORT || 3002;
 
 app.get('/books', getBooks);
 app.post('/books', postBooks);
+//add delete
+app.delete('/books/:id', deleteBook);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello from our server');
@@ -36,7 +38,7 @@ app.get('/', (req, res) => {
 async function getBooks(req, res, next) {
   try {
     let bookResults = await Book.find({email: req.query.email});
-    console.log(bookResults);
+    // console.log(bookResults);
     res.status(200).send(bookResults);
   } catch (error) {
     next(error);
@@ -53,6 +55,27 @@ async function postBooks (req, res, next) {
     });
     res.status(200).send(createdBook);
   } catch (error) {
+    next(error);
+  }
+}
+//add delete
+async function deleteBook(req, res, next){
+  let bookId = req.params.id
+  let userEmail = req.query.email;
+  console.log(bookId);
+  try{
+
+    let obj = await Book.find({
+      _id: bookId,
+      email: userEmail
+      })
+      if(userEmail === obj.email){
+
+        await Book.findByIdAndDelete(bookId);
+        res.status(200).send("Book was succsfiully deleted");
+      }
+    res.status(500).send("Book not deleted: Book does not exist in the database OR you do not have permission to delete this book.");
+  }catch(error){
     next(error);
   }
 }
