@@ -72,3 +72,11 @@ Estimated Time to Complete: Honestly have no idea
 Start time:  3:20
 Finish time: 7:30p
 Actual time to complete:  Approx.  5hours 
+
+## Lab 13
+
+Name of Feature:  Update
+Estimated Time to Complete: I would say 2 hours(ish)
+Start time:  1:30
+Finish time: 3:30
+Actual time to complete:  Approx.  2hours 
