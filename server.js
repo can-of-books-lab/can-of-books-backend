@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 
 const Book = require('./Models/Book');
+const verifyUser = require('./auth');
 
 mongoose.connect(process.env.DB_URL);
 
@@ -37,13 +38,20 @@ app.get('/', (req, res) => {
 });
 
 async function getBooks(req, res, next) {
-  try {
-    let bookResults = await Book.find({ email: req.query.email });
-    // console.log(bookResults);
-    res.status(200).send(bookResults);
-  } catch (error) {
-    next(error);
-  }
+  verifyUser(req, async (error, user) => {
+    if (error) {
+      console.error(error);
+      res.send('Invalid Token');
+    } else {
+      try {
+        let bookResults = await Book.find({ email: user.email });
+        // console.log(bookResults);
+        res.status(200).send(bookResults);
+      } catch (error) {
+        next(error);
+      }
+    }
+  });
 }
 
 async function postBooks(req, res, next) {
@@ -63,7 +71,7 @@ async function postBooks(req, res, next) {
 async function putBook(req, res, next) {
   try {
     let bookId = req.params.id;
-    let updatedBook = await Book.findByIdAndUpdate(bookId, req.body, {new: true, overwrite: true});
+    let updatedBook = await Book.findByIdAndUpdate(bookId, req.body, { new: true, overwrite: true });
     res.status(200).send(updatedBook);
   } catch (error) {
     next(error);
@@ -100,3 +108,4 @@ app.use((error, req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
